@@ -19,20 +19,20 @@ var connectDB = function connectDB() {
           _context.next = 3;
           return regeneratorRuntime.awrap(_mongoose["default"].connect(process.env.MONGO_URI, {
             useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useCreateIndex: true
+            useNewUrlParser: true // useCreateIndex: true,
+
           }));
 
         case 3:
           conn = _context.sent;
-          console.log("MongoDB Connected:".concat(conn.connection.host));
+          console.log("MongoDB Connected:".concat(conn.connection.host).cyan.underline);
           _context.next = 11;
           break;
 
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          console.error("Error: ".concat(_context.t0.message));
+          console.error("Error: ".concat(_context.t0.message).red.bold.underline);
           process.exit(1);
 
         case 11:
