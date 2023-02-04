@@ -19,7 +19,7 @@ var userSchema = _mongoose["default"].Schema({
     required: true,
     unique: true
   },
-  passWord: {
+  password: {
     type: String,
     required: true
   },
