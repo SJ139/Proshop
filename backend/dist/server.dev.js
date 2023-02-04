@@ -6,11 +6,11 @@ var _express = _interopRequireDefault(require("express"));
 
 var _colors = _interopRequireDefault(require("colors"));
 
-var _products = _interopRequireDefault(require("./data/products.js"));
-
 var _db = _interopRequireDefault(require("./config/db.js"));
 
 var dotenv = _interopRequireWildcard(require("dotenv"));
+
+var _productRoutes = _interopRequireDefault(require("./routes/productRoutes.js"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -18,9 +18,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-// const express = require('express')
-// const products = require('./data/products')
-// require('dotenv').config
 // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 (0, _db["default"])();
@@ -28,15 +25,6 @@ var app = (0, _express["default"])();
 app.get('/', function (req, res) {
   res.send('API is Running....!');
 });
-app.get('/api/products', function (req, res) {
-  res.json(_products["default"]);
-});
-app.get('/api/products/:id', function (req, res) {
-  var product = _products["default"].find(function (p) {
-    return p._id === req.params.id;
-  });
-
-  res.json(product);
-});
+app.use('/api/products', _productRoutes["default"]);
 var PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log("server running on ".concat(process.env.NODE_ENV, " mode on port ").concat(PORT).yellow.bold));

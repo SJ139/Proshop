@@ -1,12 +1,9 @@
-// const express = require('express')
-// const products = require('./data/products')
-// require('dotenv').config
 
 import express from 'express'
 import colors from 'colors'
-import products from './data/products.js'
 import connectDB from './config/db.js'
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import productRoutes from './routes/productRoutes.js'
 dotenv.config()
 
 connectDB()
@@ -16,13 +13,9 @@ app.get('/', (req,res) =>{
     res.send('API is Running....!')
 })
 
-app.get('/api/products', (req,res) =>{
-    res.json(products)
-})
-app.get('/api/products/:id', (req,res) =>{
-    const product = products.find(p => p._id === req.params.id)
-    res.json(product)
-})
+app.use('/api/products', productRoutes)
+
+
 const PORT = process.env.PORT || 5000 
 
 app.listen
