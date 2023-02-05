@@ -6,6 +6,8 @@ var _express = _interopRequireDefault(require("express"));
 
 var _colors = _interopRequireDefault(require("colors"));
 
+var _errorMiddleware = require("./middleware/errorMiddleware.js");
+
 var _db = _interopRequireDefault(require("./config/db.js"));
 
 var dotenv = _interopRequireWildcard(require("dotenv"));
@@ -27,4 +29,6 @@ app.get('/', function (req, res) {
 });
 app.use('/api/products', _productRoutes["default"]);
 var PORT = process.env.PORT || 5000;
+app.use(_errorMiddleware.notFound);
+app.use(_errorMiddleware.errorHandler);
 app.listen(PORT, console.log("server running on ".concat(process.env.NODE_ENV, " mode on port ").concat(PORT).yellow.bold));

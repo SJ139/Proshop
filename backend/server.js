@@ -1,6 +1,7 @@
 
 import express from 'express'
 import colors from 'colors'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import productRoutes from './routes/productRoutes.js'
@@ -14,9 +15,12 @@ app.get('/', (req,res) =>{
 })
 
 app.use('/api/products', productRoutes)
-
-
 const PORT = process.env.PORT || 5000 
+
+app.use(notFound)
+
+app.use(errorHandler)
+
 
 app.listen
     (PORT,
