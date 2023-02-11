@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Router>
   
-      /<Header />
+      <Header />
 
       <Routes>
         <Route path= '/' element={<HomeScreen/>} />
