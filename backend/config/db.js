@@ -1,3 +1,5 @@
+//** db.js - makes the connection the Mongo DB using mongoose */
+
 import mongoose from "mongoose"
 
 const connectDB = async () =>{
@@ -10,6 +12,7 @@ const connectDB = async () =>{
         console.log(`MongoDB Connected:${conn.connection.host}`.cyan.underline)
     }catch (error){
         console.error(`Error: ${error.message}`.red.bold.underline)
+     
         process.exit(1)
     }
 }

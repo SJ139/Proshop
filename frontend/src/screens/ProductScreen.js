@@ -7,22 +7,25 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { useParams } from 'react-router-dom'
 import { listProductDetails } from '../actions/productActions'
+import { useNavigate } from 'react-router-dom'
 
-const ProductScreen = ({}) => {
+const ProductScreen = ({history}) => {
     //The const{id}=useParams specific to Redux v8 previous versions use match.params.
     const [qty, setQty] = useState (0)
     const {id} = useParams()
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const {loading, error, product} = productDetails
+    const navigate=useNavigate()
 
     useEffect(() => {
         dispatch(listProductDetails(id))
     }, [id])
 
-    // const addToCartHandler = (0 =>{
-
-    // })
+    const addToCartHandler = () =>{
+        navigate(`/cart/${id}?qty=${qty}`)
+        
+    }
 
     // const product = {}
   
@@ -97,7 +100,7 @@ const ProductScreen = ({}) => {
                         )}
                     <ListGroupItem>
                         <Button 
-                        // onClick={addToCartHandler}
+                        onClick={addToCartHandler}
                         className='btn-block' type='button'
                         disabled={product.countInStock === 0}>Add To Cart</Button>
                     </ListGroupItem>

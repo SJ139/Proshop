@@ -22,9 +22,9 @@ router.get('/',asyncHandler(async (req,res) =>{
 router.get('/:id', asyncHandler(async (req,res) =>{
     
     const id = req.params.id
-    console.log(id)
+    // console.log(id)
     const product = await Product.findById(mongoose.Types.ObjectId(id))
-    console.log(product)
+    // console.log(product)
     if(product){
         res.json(product)
     } else{
